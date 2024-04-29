@@ -1,3 +1,6 @@
+// import java.io.*;
+// import java.util.zip.*;
+
 public class Zip{
 
     private String zipDirectory;
@@ -11,9 +14,8 @@ public class Zip{
         return zipDirectory;
     }
 
-
-    public void extractZip(){
-
+    // Methods
+    public static void extractZipFiles(String zipDirectory) {
+    
     }
-
 }

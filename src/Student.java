@@ -1,9 +1,13 @@
-public class Student {
+import java.io.Serializable;
 
+public class Student implements Serializable{
+
+    // Attributes 
     private String studentID;
     private String studentName;
     private float studentGrade;
 
+    // Set-get methods
     public String getStudentID() {
         return studentID;
     }
