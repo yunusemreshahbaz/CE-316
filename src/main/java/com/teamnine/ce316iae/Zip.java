@@ -10,8 +10,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Zip{
-
+    
+    //Attributes
     private String zipDirectory;
+    private boolean isZipPresent = false;
 
     public void setZipDirectory(String zipDirectory){
         this.zipDirectory = zipDirectory;
@@ -23,7 +25,11 @@ public class Zip{
     }
 
     // Methods
-    public static void extractZipFiles(String zipDirectory) {
+    public boolean getIsZipPresent(){
+        return isZipPresent;
+    }
+
+    public void extractZipFiles(String zipDirectory) {
         File zip = new File(zipDirectory);
         File[] zFiles = zip.listFiles((dir, name) -> name.toLowerCase().endsWith(".zip"));
         byte[] size = new byte[1024];
@@ -60,12 +66,14 @@ public class Zip{
                     }
                     zInputStream.closeEntry();
                     zInputStream.close();
+                    this.isZipPresent = true;
                 }
                 catch(IOException e){
                     e.getMessage();
                 }
             }
         } else{
+            this.isZipPresent = false;
             System.out.println("There is currently no Zip");
         }
     }
