@@ -1,30 +1,113 @@
 package com.teamnine.ce316iae;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class Configuration implements Serializable {
 
     // Attributes
+    private String configurationName;
     private int configurationID;
     private String compilerPath;
     private String language;
-    private List<String> runCommand; // gcc -o main.exe main.c etc.
-    private List<String> Arguments;  // main.exe [input list] etc.
+    private List<String> runCommand;
+    private List<String> arguments;
     private String configPath;
     private String exportPath;
 
-    public Configuration(){
-        runCommand = new ArrayList<>();
+    // Methods
+    public Configuration(int configurationID, String configurationName, String compilerPath, String language, List<String> runCommand,
+                         List<String> arguments, String configPath, String exportPath) {
+        this.configurationID = configurationID;
+        this.configurationName = configurationName;
+        this.compilerPath = compilerPath;
+        this.language = language;
+        this.runCommand = runCommand;
+        this.arguments = arguments;
+        this.configPath = configPath;
+        this.exportPath = exportPath;
     }
 
+
+    public static Configuration createConfiguration(int configurationID, String configurationName, String compilerPath, String language,
+                                                    List<String> runCommand, List<String> arguments,
+                                                    String configPath, String exportPath) {
+        return new Configuration(configurationID, configurationName, compilerPath, language, runCommand, arguments, configPath, exportPath);
+    }
+
+    public void editConfiguration(String configurationName, String compilerPath, List<String> runCommand, List<String> arguments,
+                                  String configPath, String exportPath) {
+        this.configurationName = configurationName;
+        this.compilerPath = compilerPath;
+        this.runCommand = runCommand;
+        this.arguments = arguments;
+        this.configPath = configPath;
+        this.exportPath = exportPath;
+        System.out.println("Configuration edited.");
+    }
+
+    public void removeConfiguration() {
+        System.out.println("Configuration with ID " + configurationID + " removed.");
+
+        configurationID = -1;
+        compilerPath = null;
+        configurationName = null;
+        language = null;
+        runCommand = null;
+        arguments = null;
+        configPath = null;
+        exportPath = null;
+    }
+
+    public void importConfiguration(String filePath) {
+        try {
+            // Read from file
+            FileInputStream fileIn = new FileInputStream(filePath);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Configuration importedConfig = (Configuration) in.readObject();
+            in.close();
+            fileIn.close();
+
+            // There may also updateConfig
+            this.configurationID = importedConfig.getConfigurationID();
+            this.configurationName = importedConfig.getConfigurationName();
+            this.compilerPath = importedConfig.getCompilerPath();
+            this.language = importedConfig.getLanguage();
+            this.runCommand = importedConfig.getRunCommand();
+            this.arguments = importedConfig.getArguments();
+            this.configPath = importedConfig.getConfigPath();
+            this.exportPath = importedConfig.getExportPath();
+
+            System.out.println("Configuration imported successfully.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error importing configuration: " + e.getMessage());
+        }
+    }
+
+    public void exportConfiguration(String filePath) {
+        try {
+
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+
+            System.out.println("Configuration exported successfully.");
+        } catch (IOException e) {
+            System.out.println("Error exporting configuration: " + e.getMessage());
+        }
+    }
+
+    // Method to get configuration information
     public String ConfigInfo() {
         return "ConfigurationID: " + this.configurationID +
                 "\nCompiler Path: " + this.compilerPath +
                 "\nLanguage: " + this.language +
-                "\runCommand: " + String.join(" ", this.runCommand) +
-                "\nExecutable : " + this.configPath + "/" + this.exportPath;
+                "\nRun Command: " + String.join(" ", this.runCommand) +
+                "\nArguments: " + String.join(" ", this.arguments) +
+                "\nConfig Path: " + this.configPath +
+                "\nExport Path: " + this.exportPath;
     }
 
     // Get-set Methods
@@ -51,21 +134,21 @@ public class Configuration implements Serializable {
     public void setLanguage(String language) {
         this.language = language;
     }
-   
+
     public List<String> getRunCommand() {
         return runCommand;
     }
 
-    public void setRunCommmand(List<String> runCommand) {
+    public void setRunCommand(List<String> runCommand) {
         this.runCommand = runCommand;
     }
 
     public List<String> getArguments() {
-        return Arguments;
+        return arguments;
     }
 
     public void setArguments(List<String> Arguments) {
-        this.Arguments = Arguments;
+        this.arguments = Arguments;
     }
 
     public String getConfigPath() {
@@ -84,25 +167,12 @@ public class Configuration implements Serializable {
         this.exportPath = exportPath;
     }
 
-    // Methods
-    public void createConfiguration() {
+    public String getConfigurationName(){
+        return  configurationName;
+    }
 
+    public void setConfigurationName(String configurationName){
+        this.configurationName = configurationName;
     }
-    
-    public void editConfiguration() {
-        
-    }
-    
-    public void removeConfiguration() {
-    
-    }
-    
-    public void importConfiguration() {
 
-    }
-    
-    public void exportConfiguration() {
-        
-    }  
-   
 }
