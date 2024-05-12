@@ -1,12 +1,10 @@
 package com.teamnine.ce316iae.controllers;
 
-import com.teamnine.ce316iae.Project;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.teamnine.ce316iae.Configuration;
+import com.teamnine.ce316iae.ConfigurationService;
 
 public class ProjectController {
 
@@ -15,22 +13,32 @@ public class ProjectController {
     @FXML
     private TextField projectDirectoryField;
     @FXML
+    private ComboBox<Configuration> configurationComboBox; // Add this line
+    @FXML
     private Button addProjectButton;
     @FXML
     private ListView<String> projectListView;
 
-    private ObservableList<String> projects = FXCollections.observableArrayList();
-
     @FXML
     private void initialize() {
-        projectListView.setItems(projects);
+        // Load configurations into the ComboBox
+        configurationComboBox.setItems(ConfigurationService.getConfigurations());
+        configurationComboBox.setCellFactory(listView -> new ListCell<Configuration>() {
+            @Override
+            protected void updateItem(Configuration config, boolean empty) {
+                super.updateItem(config, empty);
+                setText(empty || config == null ? "" : config.getConfigurationName());
+            }
+        });
+
+        projectListView.setItems(FXCollections.observableArrayList());
         addProjectButton.setOnAction(e -> addProject());
     }
 
     private void addProject() {
-        Project project = new Project();
-        project.setProjectName(projectNameField.getText());
-        project.setProjectDirectory(projectDirectoryField.getText());
-        projects.add(project.getProjectName() + " - " + project.getProjectDirectory());
+        String projectName = projectNameField.getText();
+        String projectDirectory = projectDirectoryField.getText();
+        Configuration config = configurationComboBox.getValue();
+        projectListView.getItems().add(projectName + " - " + projectDirectory + " (" + (config != null ? config.getConfigurationName() : "No configuration selected") + ")");
     }
 }

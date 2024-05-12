@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
-public abstract class Compiler {
+public abstract class   Compiler {
     protected final File workingDirectory;
 
     public Compiler(File workingDirectory) {

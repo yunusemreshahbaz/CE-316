@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ComboBox?>
 
 <VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController">
     <Label text="Project Name:"/>
     <TextField fx:id="projectNameField"/>
     <Label text="Project Directory:"/>
     <TextField fx:id="projectDirectoryField"/>
+    <Label text="Select Configuration:"/>
+    <ComboBox fx:id="configurationComboBox"/>
     <Button text="Add Project" fx:id="addProjectButton"/>
     <ListView fx:id="projectListView"/>
 </VBox>
