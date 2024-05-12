@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<GridPane hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ConfigurationController">
+    <Label text="Configuration ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="configurationIDField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <Label text="Configuration Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <TextField fx:id="configurationNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label text="Compiler Path:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="compilerPathField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="Language:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextField fx:id="languageField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Label text="Run Command:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <TextField fx:id="runCommandField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <Label text="Arguments:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <TextField fx:id="argumentsField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <Label text="Config Path:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <TextField fx:id="configPathField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    <Label text="Export Path:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+    <TextField fx:id="exportPathField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    <Button text="Save Configuration" fx:id="saveConfigurationButton" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+</GridPane>

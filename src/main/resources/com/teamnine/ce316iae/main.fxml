@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.MainController">
+    <Button text="Configuration" onAction="#loadConfiguration" maxWidth="Infinity"/>
+    <Button text="Assignment" onAction="#loadAssignment" maxWidth="Infinity"/>
+    <Button text="Project" onAction="#loadProject" maxWidth="Infinity"/>
+    <Button text="Output" onAction="#loadOutput" maxWidth="Infinity"/>
+    <Button text="Zip" onAction="#loadZip" maxWidth="Infinity"/>
+    <padding>
+        <Insets top="20" right="50" bottom="20" left="50"/>
+    </padding>
+</VBox>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ZipController">
+    <Label text="Zip Directory:"/>
+    <TextField fx:id="zipDirectoryField"/>
+    <Button text="Extract Files" fx:id="extractButton"/>
+</VBox>

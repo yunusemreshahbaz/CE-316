@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.AssignmentController">
+    <Label text="Assignment ID:"/>
+    <TextField fx:id="assignmentIDField"/>
+    <Label text="Source Code:"/>
+    <TextField fx:id="sourceCodeField"/>
+    <Label text="Expected Output:"/>
+    <TextField fx:id="expectedOutputField"/>
+    <Button text="Run Assignment" fx:id="runAssignmentButton"/>
+</VBox>

@@ -28,6 +28,10 @@ public class Configuration implements Serializable {
         this.exportPath = exportPath;
     }
 
+    public Configuration() {
+
+    }
+
 
     public static Configuration createConfiguration(int configurationID, String configurationName, String compilerPath, String language,
                                                     List<String> runCommand, List<String> arguments,
