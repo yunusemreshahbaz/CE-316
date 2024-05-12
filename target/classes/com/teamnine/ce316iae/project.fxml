@@ -6,13 +6,13 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ComboBox?>
 
-<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController">
-    <Label text="Project Name:"/>
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController" style="-fx-background-color: #f2f2f2;">
+    <Label text="Project Name:" style="-fx-text-fill: #333;"/>
     <TextField fx:id="projectNameField"/>
-    <Label text="Project Directory:"/>
+    <Label text="Project Directory:" style="-fx-text-fill: #333;"/>
     <TextField fx:id="projectDirectoryField"/>
-    <Label text="Select Configuration:"/>
+    <Label text="Select Configuration:" style="-fx-text-fill: #333;"/>
     <ComboBox fx:id="configurationComboBox"/>
-    <Button text="Add Project" fx:id="addProjectButton"/>
+    <Button text="Add Project" fx:id="addProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
     <ListView fx:id="projectListView"/>
 </VBox>

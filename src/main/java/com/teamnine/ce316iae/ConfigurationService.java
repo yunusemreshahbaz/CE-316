@@ -4,11 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.io.*;
 import java.util.*;
+import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
+import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
+import java.io.File;
+import java.util.Arrays;
 
 public class ConfigurationService {
     private static final ObservableList<Configuration> configurations = FXCollections.observableArrayList();
 
     public static ObservableList<Configuration> getConfigurations() {
+        if (configurations.isEmpty()) {
+            loadConfigurations();  // Load configurations if list is empty
+        }
         return configurations;
     }
 
@@ -16,15 +23,18 @@ public class ConfigurationService {
         configurations.add(configuration);
     }
 
-    // Optional: Load initial configurations from a file or database
-    static {
-        // Load configurations when the class is loaded
-        loadConfigurations();
-    }
-
     private static void loadConfigurations() {
-        // Dummy configurations for demonstration
-        addConfiguration(new Configuration(1, "Default Config", "/usr/bin/gcc", "C++", Arrays.asList("./a.out"), Arrays.asList("-O2"), "/configs", "/exports"));
-        // Add more configurations if needed
+        // Example loading logic
+        File cWorkingDirectory = new File("/path/to/c/projects");
+        CCompiler cCompiler = new CCompiler(cWorkingDirectory);
+
+        File javaWorkingDirectory = new File("/path/to/java/projects");
+        JavaCompiler javaCompiler = new JavaCompiler(javaWorkingDirectory);
+
+        addConfiguration(new Configuration(1, "C Compiler Configuration", CCompiler.COMPILER_PATH, "C",
+                Arrays.asList(CCompiler.RUN_COMMAND), Arrays.asList(CCompiler.ARGS), "/configs", "/exports"));
+
+        addConfiguration(new Configuration(2, "Java Compiler Configuration", JavaCompiler.COMPILER_PATH, "Java",
+                Arrays.asList(JavaCompiler.RUN_COMMAND), Arrays.asList(JavaCompiler.ARGS), "/configs", "/exports"));
     }
 }

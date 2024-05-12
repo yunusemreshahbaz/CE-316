@@ -1,9 +1,13 @@
 package com.teamnine.ce316iae.controllers;
 
 import com.teamnine.ce316iae.Configuration;
+import com.teamnine.ce316iae.ConfigurationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Arrays;
 
@@ -30,22 +34,52 @@ public class ConfigurationController {
 
     private Configuration configuration;
 
+    @FXML private TableView<Configuration> configurationTable;
+    @FXML private TableColumn<Configuration, Integer> columnID;
+    @FXML private TableColumn<Configuration, String> columnName;
+    @FXML private TableColumn<Configuration, String> columnCompilerPath;
+    @FXML private TableColumn<Configuration, String> columnLanguage;
+
     @FXML
     private void initialize() {
-        saveConfigurationButton.setOnAction(e -> saveConfiguration());
+        columnID.setCellValueFactory(new PropertyValueFactory<>("configurationID"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("configurationName"));
+        columnCompilerPath.setCellValueFactory(new PropertyValueFactory<>("compilerPath"));
+        columnLanguage.setCellValueFactory(new PropertyValueFactory<>("language"));
+
+        configurationTable.setItems(ConfigurationService.getConfigurations());
     }
 
+    @FXML
     private void saveConfiguration() {
-        if (configuration == null) {
-            configuration = new Configuration();
+        try {
+            int configurationID = Integer.parseInt(configurationIDField.getText().trim());
+            if (configuration == null) {
+                configuration = new Configuration();
+            }
+
+            configuration.setConfigurationID(configurationID);
+            configuration.setConfigurationName(configurationNameField.getText().trim());
+            configuration.setCompilerPath(compilerPathField.getText().trim());
+            configuration.setLanguage(languageField.getText().trim());
+            configuration.setRunCommand(Arrays.asList(runCommandField.getText().split("\\s+")));
+            configuration.setArguments(Arrays.asList(argumentsField.getText().split("\\s+")));
+            configuration.setConfigPath(configPathField.getText().trim());
+            configuration.setExportPath(exportPathField.getText().trim());
+
+            boolean isNew = ConfigurationService.getConfigurations().stream()
+                    .noneMatch(c -> c.getConfigurationID() == configuration.getConfigurationID());
+
+            if (isNew) {
+                ConfigurationService.addConfiguration(configuration);
+                configurationTable.setItems(ConfigurationService.getConfigurations()); // Re-set the items to force update
+            }
+            configurationTable.refresh(); // Refresh here to update the view in all cases
+        } catch (NumberFormatException e) {
+            System.out.println("Error parsing configuration ID: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error saving configuration: " + e.getMessage());
         }
-        configuration.setConfigurationID(Integer.parseInt(configurationIDField.getText()));
-        configuration.setConfigurationName(configurationNameField.getText());
-        configuration.setCompilerPath(compilerPathField.getText());
-        configuration.setLanguage(languageField.getText());
-        configuration.setRunCommand(Arrays.asList(runCommandField.getText().split("\\s+")));
-        configuration.setArguments(Arrays.asList(argumentsField.getText().split("\\s+")));
-        configuration.setConfigPath(configPathField.getText());
-        configuration.setExportPath(exportPathField.getText());
     }
+
 }

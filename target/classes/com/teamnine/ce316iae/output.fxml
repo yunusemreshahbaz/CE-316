@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.OutputController">
-    <children>
-        <StackPane VBox.vgrow="ALWAYS" alignment="CENTER">
-            <AnchorPane prefHeight="364.0" prefWidth="444.0">
-                <children>
-                    <TableView layoutX="18.0" layoutY="93.0" prefHeight="257.0" prefWidth="444.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="93.0">
-                        <columns>
-                            <TableColumn prefWidth="151.20001220703125" text="Submission Output" />
-                            <TableColumn prefWidth="151.20001220703125" text="Expected Output" />
-                            <TableColumn prefWidth="151.20001220703125" text="Result" />
-                        </columns>
-                    </TableView>
-                    <Button fx:id="compareButton" layoutX="299.0" layoutY="44.0" mnemonicParsing="false" text="Enter" />
-                    <TextField layoutX="120.0" layoutY="43.0" prefHeight="26.0" promptText="Student Number" />
-                </children>
-            </AnchorPane>
-        </StackPane>
-    </children>
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.OutputController" style="-fx-background-color: #f2f2f2;">
+    <StackPane VBox.vgrow="ALWAYS" alignment="CENTER">
+        <AnchorPane prefHeight="364.0" prefWidth="444.0">
+            <TableView layoutX="18.0" layoutY="93.0" prefHeight="257.0" prefWidth="444.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="93.0">
+                <columns>
+                    <TableColumn prefWidth="151.2" text="Submission Output" />
+                    <TableColumn prefWidth="151.2" text="Expected Output" />
+                    <TableColumn prefWidth="141.6" text="Result" />
+                </columns>
+            </TableView>
+            <Button fx:id="compareButton" layoutX="299.0" layoutY="44.0" mnemonicParsing="false" text="Enter" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+            <TextField layoutX="120.0" layoutY="43.0" prefHeight="26.0" promptText="Student Number"/>
+        </AnchorPane>
+    </StackPane>
 </VBox>
