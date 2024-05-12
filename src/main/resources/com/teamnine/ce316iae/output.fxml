@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.OutputController">
-    <Label text="Expected Output:"/>
-    <TextField fx:id="expectedOutputField"/>
-    <Label text="Actual Output:"/>
-    <TextField fx:id="actualOutputField"/>
-    <Button text="Compare Outputs" fx:id="compareButton"/>
-    <Label fx:id="resultLabel"/>
+    <children>
+        <StackPane VBox.vgrow="ALWAYS" alignment="CENTER">
+            <AnchorPane prefHeight="364.0" prefWidth="444.0">
+                <children>
+                    <TableView layoutX="18.0" layoutY="93.0" prefHeight="257.0" prefWidth="444.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="93.0">
+                        <columns>
+                            <TableColumn prefWidth="151.20001220703125" text="Submission Output" />
+                            <TableColumn prefWidth="151.20001220703125" text="Expected Output" />
+                            <TableColumn prefWidth="151.20001220703125" text="Result" />
+                        </columns>
+                    </TableView>
+                    <Button fx:id="compareButton" layoutX="299.0" layoutY="44.0" mnemonicParsing="false" text="Enter" />
+                    <TextField layoutX="120.0" layoutY="43.0" prefHeight="26.0" promptText="Student Number" />
+                </children>
+            </AnchorPane>
+        </StackPane>
+    </children>
 </VBox>
