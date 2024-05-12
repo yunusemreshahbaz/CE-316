@@ -1,5 +1,6 @@
 package com.teamnine.ce316iae.controllers;
 
+import com.teamnine.ce316iae.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,49 +11,61 @@ import java.io.IOException;
 
 public class MainController {
 
-    private Stage stage;
+    private static Stage stage;
+
+    public MainController(Stage stage) {
+        MainController.stage = stage;
+    }
+
+    public MainController() {
+    }
 
     public void setStage(Stage stage) {
-        this.stage = stage;
+        MainController.stage = stage;
     }
 
     @FXML
-    private void loadConfiguration() {
-        loadScene("/com/teamnine/ce316iae/configuration.fxml");
+    public void loadMain() {
+        loadScene("/com/teamnine/ce316iae/main.fxml", "Integrated Assignment Environment - Main");
     }
 
     @FXML
-    private void loadAssignment() {
-        loadScene("/com/teamnine/ce316iae/assignment.fxml");
+    public void loadConfiguration() {
+        loadScene("/com/teamnine/ce316iae/configuration.fxml", "Integrated Assignment Environment - Configuration");
     }
 
     @FXML
-    private void loadProject() {
-        loadScene("/com/teamnine/ce316iae/project.fxml");
+    public void loadAssignment() {
+        loadScene("/com/teamnine/ce316iae/assignment.fxml", "Integrated Assignment Environment - Assignment");
     }
 
     @FXML
-    private void loadOutput() {
-        loadScene("/com/teamnine/ce316iae/output.fxml");
+    public void loadProject() {
+        loadScene("/com/teamnine/ce316iae/project.fxml", "Integrated Assignment Environment - Project");
     }
 
     @FXML
-    private void loadZip() {
-        loadScene("/com/teamnine/ce316iae/zip.fxml");
+    public void loadOutput() {
+        loadScene("/com/teamnine/ce316iae/output.fxml", "Integrated Assignment Environment - Output");
     }
 
     @FXML
-    private void maximizeWindow() {
-        stage.setMaximized(true);
+    public void loadZip() {
+        loadScene("/com/teamnine/ce316iae/zip.fxml", "Integrated Assignment Environment - Zip");
     }
 
-    private void loadScene(String fxmlFile) {
+    @FXML
+    public void maximizeWindow() {
+        MainController.stage.setMaximized(true);
+    }
+
+    private void loadScene(String fxmlFile, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxmlFile));
+            Scene scene = new Scene(fxmlLoader.load());
+            MainController.stage.setTitle(title);
+            MainController.stage.setScene(scene);
+            MainController.stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading the scene: " + fxmlFile);

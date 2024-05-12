@@ -41,16 +41,6 @@ public class AssignmentController {
 
     @FXML
     private void goBack() {
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/teamnine/ce316iae/main.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) assignmentIDField.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch(IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading the previous scene.");
-        }
+        new MainController().loadMain();
     }
 }

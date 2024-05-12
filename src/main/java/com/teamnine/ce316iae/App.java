@@ -12,13 +12,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        MainController mainController = fxmlLoader.getController();
-        mainController.setStage(stage);
-        stage.setTitle("Integrated Assignment Environment");
-        stage.setScene(scene);
-        stage.show();
+        MainController mainController = new MainController(stage);
+        mainController.loadMain();
     }
 
     public static void main(String[] args) {
