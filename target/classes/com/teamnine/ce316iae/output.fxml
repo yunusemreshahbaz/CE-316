@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.OutputController">
+    <Label text="Expected Output:"/>
+    <TextField fx:id="expectedOutputField"/>
+    <Label text="Actual Output:"/>
+    <TextField fx:id="actualOutputField"/>
+    <Button text="Compare Outputs" fx:id="compareButton"/>
+    <Label fx:id="resultLabel"/>
+</VBox>

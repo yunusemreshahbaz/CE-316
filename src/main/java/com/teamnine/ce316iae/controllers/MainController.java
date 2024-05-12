@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -38,6 +39,11 @@ public class MainController {
     @FXML
     private void loadZip() {
         loadScene("/com/teamnine/ce316iae/zip.fxml");
+    }
+
+    @FXML
+    private void maximizeWindow() {
+        stage.setMaximized(true);
     }
 
     private void loadScene(String fxmlFile) {
