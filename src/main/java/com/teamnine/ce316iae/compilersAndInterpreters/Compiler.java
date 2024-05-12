@@ -31,7 +31,7 @@ public abstract class Compiler {
             while ((line = reader.readLine()) != null) {
                 outputBuilder.append(line).append("\n");
             }
-            return new Output(outputBuilder.toString(), process.exitValue(), null);
+            return new Output(true, "", outputBuilder.toString());
         }
     }
 
@@ -52,7 +52,7 @@ public abstract class Compiler {
             while ((line = reader.readLine()) != null) {
                 outputBuilder.append(line).append("\n");
             }
-            return new Output(outputBuilder.toString(), process.exitValue(), null);
+            return new Output(true, "", outputBuilder.toString());
         }
     }
 

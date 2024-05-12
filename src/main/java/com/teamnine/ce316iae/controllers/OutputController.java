@@ -21,7 +21,7 @@ public class OutputController {
 
     @FXML
     private void initialize() {
-        output = new Output();
+        output = new Output(false, "", "");
         compareButton.setOnAction(e -> compareOutputs());
     }
 

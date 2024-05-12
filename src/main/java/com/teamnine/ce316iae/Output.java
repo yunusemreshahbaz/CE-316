@@ -10,6 +10,13 @@ public class Output implements Serializable {
     private String expectedOutput;
     private String actualOutput;
 
+    // Constructor
+    public Output(boolean compareResult, String expectedOutput, String actualOutput) {
+        this.compareResult = compareResult;
+        this.expectedOutput = expectedOutput;
+        this.actualOutput = actualOutput;
+    }
+
     // Methods
 
     public boolean compareOutput(String expectedOutput, String actualOutput) {
