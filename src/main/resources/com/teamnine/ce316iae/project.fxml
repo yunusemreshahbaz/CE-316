@@ -6,7 +6,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ComboBox?>
 
-<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController" style="-fx-background-color: #f2f2f2;">
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController"
+      minHeight="800" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
     <Label text="Project Name:" style="-fx-text-fill: #333;"/>
     <TextField fx:id="projectNameField"/>
     <Label text="Project Directory:" style="-fx-text-fill: #333;"/>

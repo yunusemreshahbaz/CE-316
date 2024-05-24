@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 
-<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.AssignmentController" style="-fx-background-color: #f2f2f2;">
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.AssignmentController"
+      minHeight="800" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
     <Label text="Assignment ID:" style="-fx-text-fill: #333;"/>
     <TextField fx:id="assignmentIDField"/>
     <Label text="Source Code:" style="-fx-text-fill: #333;"/>
