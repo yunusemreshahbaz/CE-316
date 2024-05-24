@@ -24,4 +24,9 @@ public class ZipController {
         zip.setZipDirectory(zipDirectoryField.getText());
         Zip.extractZipFiles(zip.getZipDirectory());
     }
+
+    @FXML
+    private void goBack() {
+        new MainController().loadMain();
+    }
 }

@@ -16,4 +16,5 @@
             <TextField layoutX="120.0" layoutY="43.0" prefHeight="26.0" promptText="Student Number"/>
         </AnchorPane>
     </StackPane>
+    <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>

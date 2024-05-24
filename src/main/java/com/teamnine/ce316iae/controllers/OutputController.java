@@ -29,4 +29,9 @@ public class OutputController {
         boolean result = output.compareOutput(expectedOutputField.getText(), actualOutputField.getText());
         resultLabel.setText(result ? "Match" : "Does not match");
     }
+
+    @FXML
+    private void goBack() {
+        new MainController().loadMain();
+    }
 }

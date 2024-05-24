@@ -15,4 +15,5 @@
     <ComboBox fx:id="configurationComboBox"/>
     <Button text="Add Project" fx:id="addProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
     <ListView fx:id="projectListView"/>
+    <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>

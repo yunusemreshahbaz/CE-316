@@ -34,4 +34,5 @@
             <TableColumn text="Compiler Path" fx:id="columnCompilerPath"/>
         </columns>
     </TableView>
+    <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </GridPane>

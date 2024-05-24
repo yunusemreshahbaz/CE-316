@@ -8,4 +8,5 @@
     <Label text="Zip Directory:" style="-fx-text-fill: #333;"/>
     <TextField fx:id="zipDirectoryField"/>
     <Button text="Extract Files" fx:id="extractButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+    <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>

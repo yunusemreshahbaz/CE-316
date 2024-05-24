@@ -41,4 +41,9 @@ public class ProjectController {
         Configuration config = configurationComboBox.getValue();
         projectListView.getItems().add(projectName + " - " + projectDirectory + " (" + (config != null ? config.getConfigurationName() : "No configuration selected") + ")");
     }
+
+    @FXML
+    private void goBack() {
+        new MainController().loadMain();
+    }
 }

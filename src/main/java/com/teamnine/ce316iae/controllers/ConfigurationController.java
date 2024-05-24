@@ -82,4 +82,9 @@ public class ConfigurationController {
         }
     }
 
+    @FXML
+    private void goBack() {
+        new MainController().loadMain();
+    }
+
 }
