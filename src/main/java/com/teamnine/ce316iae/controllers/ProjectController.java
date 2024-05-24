@@ -10,17 +10,20 @@ public class ProjectController {
     @FXML
     private TextField projectNameField;
     @FXML
-    private TextField projectDirectoryField;
+    private ComboBox<Configuration> configurationComboBox;
     @FXML
-    private ComboBox<Configuration> configurationComboBox; // Add this line
+    private TextField submissionsDirectoryField;
     @FXML
-    private Button addProjectButton;
+    private ComboBox<String> inputMethodComboBox;
+    @FXML
+    private TextField expectedOutputFileField;
+    @FXML
+    private Button createProjectButton;
     @FXML
     private ListView<String> projectListView;
 
     @FXML
     private void initialize() {
-        // Load configurations into the ComboBox
         configurationComboBox.setItems(Configuration.getConfigurations());
         configurationComboBox.setCellFactory(listView -> new ListCell<Configuration>() {
             @Override
@@ -30,15 +33,18 @@ public class ProjectController {
             }
         });
 
+        inputMethodComboBox.setItems(FXCollections.observableArrayList("Standard Input", "Arguments"));
         projectListView.setItems(FXCollections.observableArrayList());
-        addProjectButton.setOnAction(e -> addProject());
+        createProjectButton.setOnAction(e -> createProject());
     }
 
-    private void addProject() {
+    private void createProject() {
         String projectName = projectNameField.getText();
-        String projectDirectory = projectDirectoryField.getText();
         Configuration config = configurationComboBox.getValue();
-        projectListView.getItems().add(projectName + " - " + projectDirectory + " (" + (config != null ? config.getConfigurationName() : "No configuration selected") + ")");
+        String submissionsDirectory = submissionsDirectoryField.getText();
+        String inputMethod = inputMethodComboBox.getValue();
+        String expectedOutput = expectedOutputFileField.getText();
+        projectListView.getItems().add(projectName + " - " + submissionsDirectory + " - " + inputMethod + " - " + expectedOutput + " (" + (config != null ? config.getConfigurationName() : "No configuration selected") + ")");
     }
 
     @FXML

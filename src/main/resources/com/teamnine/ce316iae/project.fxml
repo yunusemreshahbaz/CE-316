@@ -10,11 +10,15 @@
       minHeight="800" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
     <Label text="Project Name:" style="-fx-text-fill: #333;"/>
     <TextField fx:id="projectNameField"/>
-    <Label text="Project Directory:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="projectDirectoryField"/>
     <Label text="Select Configuration:" style="-fx-text-fill: #333;"/>
     <ComboBox fx:id="configurationComboBox"/>
-    <Button text="Add Project" fx:id="addProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+    <Label text="Submissions Directory [Zip Files]:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="submissionsDirectoryField"/>
+    <Label text="Input Method:" style="-fx-text-fill: #333;"/>
+    <ComboBox fx:id="inputMethodComboBox"/>
+    <Label text="Expected Output File:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="expectedOutputFileField"/>
+    <Button text="Create" fx:id="createProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
     <ListView fx:id="projectListView"/>
     <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>

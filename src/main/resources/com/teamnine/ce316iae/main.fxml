@@ -10,7 +10,6 @@
     <Button text="Project" onAction="#loadProject" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <Button text="Configuration" onAction="#loadConfiguration" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <Button text="Output" onAction="#loadOutput" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
-    <Button text="Zip" onAction="#loadZip" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <padding>
         <Insets top="20" right="50" bottom="20" left="50"/>
     </padding>
