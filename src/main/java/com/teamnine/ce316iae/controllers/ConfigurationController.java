@@ -1,7 +1,6 @@
 package com.teamnine.ce316iae.controllers;
 
 import com.teamnine.ce316iae.Configuration;
-import com.teamnine.ce316iae.ConfigurationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
@@ -47,7 +46,7 @@ public class ConfigurationController {
         columnCompilerPath.setCellValueFactory(new PropertyValueFactory<>("compilerPath"));
         columnLanguage.setCellValueFactory(new PropertyValueFactory<>("language"));
 
-        configurationTable.setItems(ConfigurationService.getConfigurations());
+        configurationTable.setItems(Configuration.getConfigurations());
     }
 
     @FXML
@@ -67,12 +66,12 @@ public class ConfigurationController {
             configuration.setConfigPath(configPathField.getText().trim());
             configuration.setExportPath(exportPathField.getText().trim());
 
-            boolean isNew = ConfigurationService.getConfigurations().stream()
+            boolean isNew = Configuration.getConfigurations().stream()
                     .noneMatch(c -> c.getConfigurationID() == configuration.getConfigurationID());
 
             if (isNew) {
-                ConfigurationService.addConfiguration(configuration);
-                configurationTable.setItems(ConfigurationService.getConfigurations()); // Re-set the items to force update
+                Configuration.addConfiguration(configuration);
+                configurationTable.setItems(Configuration.getConfigurations()); // Re-set the items to force update
             }
             configurationTable.refresh(); // Refresh here to update the view in all cases
         } catch (NumberFormatException e) {

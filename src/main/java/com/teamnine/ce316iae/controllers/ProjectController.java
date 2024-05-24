@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import com.teamnine.ce316iae.Configuration;
-import com.teamnine.ce316iae.ConfigurationService;
 
 public class ProjectController {
 
@@ -22,7 +21,7 @@ public class ProjectController {
     @FXML
     private void initialize() {
         // Load configurations into the ComboBox
-        configurationComboBox.setItems(ConfigurationService.getConfigurations());
+        configurationComboBox.setItems(Configuration.getConfigurations());
         configurationComboBox.setCellFactory(listView -> new ListCell<Configuration>() {
             @Override
             protected void updateItem(Configuration config, boolean empty) {

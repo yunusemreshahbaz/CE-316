@@ -9,7 +9,6 @@ public class Project implements Serializable {
     private int projectID;
     private String projectName;
     private String projectDirectory;
-    private List<Assignment> assignments;
 
     // Set-get methods
     public int getProjectID() {
@@ -36,34 +35,8 @@ public class Project implements Serializable {
         this.projectDirectory = projectDirectory;
     }
 
-    public List<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments = assignments;
-    }
 
     // Methods
-
-    // Add to array list
-    public void createAssignment(Assignment assignment) {
-        if (assignment != null) {
-            assignments.add(assignment);
-            System.out.println("Assignment added to the project.");
-        } else {
-            System.out.println("Invalid assignment provided.");
-        }
-    }
-
-    // Remove from array list
-    public void removeAssignment(Assignment assignment) {
-        if (assignments.remove(assignment)) {
-            System.out.println("Assignment removed from the project.");
-        } else {
-            System.out.println("Assignment not found in the project.");
-        }
-    }
 
     public void exportConfiguration(Configuration configuration) {
         if (configuration != null) {

@@ -1,7 +1,14 @@
 package com.teamnine.ce316iae;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.util.*;
+import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
+import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
+import java.io.File;
+import java.util.Arrays;
 
 public class Configuration implements Serializable {
 
@@ -14,6 +21,10 @@ public class Configuration implements Serializable {
     private List<String> arguments;
     private String configPath;
     private String exportPath;
+
+
+    // Static list of configurations
+    private static final ObservableList<Configuration> configurations = FXCollections.observableArrayList();
 
     // Methods
     public Configuration(int configurationID, String configurationName, String compilerPath, String language, List<String> runCommand,
@@ -32,6 +43,31 @@ public class Configuration implements Serializable {
 
     }
 
+    public static ObservableList<Configuration> getConfigurations() {
+        if (configurations.isEmpty()) {
+            loadConfigurations();
+        }
+        return configurations;
+    }
+
+    public static void addConfiguration(Configuration configuration) {
+        configurations.add(configuration);
+    }
+
+    private static void loadConfigurations() {
+
+        File cWorkingDirectory = new File("/path/to/c/projects");
+        CCompiler cCompiler = new CCompiler(cWorkingDirectory);
+
+        File javaWorkingDirectory = new File("/path/to/java/projects");
+        JavaCompiler javaCompiler = new JavaCompiler(javaWorkingDirectory);
+
+        addConfiguration(new Configuration(1, "C Compiler Configuration", CCompiler.COMPILER_PATH, "C",
+                Arrays.asList(CCompiler.RUN_COMMAND), Arrays.asList(CCompiler.ARGS), "/configs", "/exports"));
+
+        addConfiguration(new Configuration(2, "Java Compiler Configuration", JavaCompiler.COMPILER_PATH, "Java",
+                Arrays.asList(JavaCompiler.RUN_COMMAND), Arrays.asList(JavaCompiler.ARGS), "/configs", "/exports"));
+    }
 
     public static Configuration createConfiguration(int configurationID, String configurationName, String compilerPath, String language,
                                                     List<String> runCommand, List<String> arguments,
@@ -178,5 +214,4 @@ public class Configuration implements Serializable {
     public void setConfigurationName(String configurationName){
         this.configurationName = configurationName;
     }
-
 }

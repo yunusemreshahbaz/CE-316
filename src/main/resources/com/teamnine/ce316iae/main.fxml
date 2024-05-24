@@ -8,7 +8,6 @@
 
     <Text text="Integrated Assignment Environment - Group 9" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
     <Button text="Project" onAction="#loadProject" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
-    <Button text="Assignment" onAction="#loadAssignment" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <Button text="Configuration" onAction="#loadConfiguration" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <Button text="Output" onAction="#loadOutput" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <Button text="Zip" onAction="#loadZip" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
