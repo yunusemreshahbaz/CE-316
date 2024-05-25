@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import com.teamnine.ce316iae.Configuration;
+import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -141,55 +142,56 @@ public class ProjectController {
 
     private void run() {
         listView2.getItems().clear();
+        JavaCompiler javaCompiler = new JavaCompiler(new File("/path/to/java/projects"));
         for (File studentDir : studentDirectories) {
-            String output = compileAndRunStudentCode(studentDir);
+            String output = javaCompiler.compileAndRun(studentDir, selectedOutputFile);
             listView2.getItems().add(output);
         }
     }
 
-    private String compileAndRunStudentCode(File studentDir) {
-        try {
-            File[] javaFiles = studentDir.listFiles((dir, name) -> name.endsWith(".java"));
-            if (javaFiles != null) {
-                List<String> compileCommand = new ArrayList<>();
-                compileCommand.add("javac");
-                for (File javaFile : javaFiles) {
-                    compileCommand.add(javaFile.getAbsolutePath());
-                }
-                Process compileProcess = new ProcessBuilder(compileCommand).start();
-                compileProcess.waitFor();
-                if (compileProcess.exitValue() == 0) {
-                    // if compilation is successful
-                    File mainClass = Arrays.stream(studentDir.listFiles())
-                            .filter(file -> file.getName().endsWith(".class"))
-                            .findFirst().orElse(null);
-                    if (mainClass != null) {
-                        String className = mainClass.getName().replace(".class", "");
-                        Process runProcess = new ProcessBuilder("java", "-cp", studentDir.getAbsolutePath(), className).start();
-                        runProcess.waitFor();
-                        if (runProcess.exitValue() == 0) {
-                            // If the program ran successfully, read output from selected file
-                            List<String> lines = Files.readAllLines(selectedOutputFile.toPath(), StandardCharsets.UTF_8);
-                            return String.join("\n", lines);
-                        } else {
-                            // If the program encountered an error during execution
-                            return new String(runProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
-                        }
-                    } else {
-                        return "No main class found to run.";
-                    }
-                } else {
-                    // If there are compilation errors
-                    return new String(compileProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
-                }
-            } else {
-                return "No Java files found.";
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-    }
+    // private String compileAndRunStudentCode(File studentDir) {
+    //     try {
+    //         File[] javaFiles = studentDir.listFiles((dir, name) -> name.endsWith(".java"));
+    //         if (javaFiles != null) {
+    //             List<String> compileCommand = new ArrayList<>();
+    //             compileCommand.add("javac");
+    //             for (File javaFile : javaFiles) {
+    //                 compileCommand.add(javaFile.getAbsolutePath());
+    //             }
+    //             Process compileProcess = new ProcessBuilder(compileCommand).start();
+    //             compileProcess.waitFor();
+    //             if (compileProcess.exitValue() == 0) {
+    //                 // if compilation is successful
+    //                 File mainClass = Arrays.stream(studentDir.listFiles())
+    //                         .filter(file -> file.getName().endsWith(".class"))
+    //                         .findFirst().orElse(null);
+    //                 if (mainClass != null) {
+    //                     String className = mainClass.getName().replace(".class", "");
+    //                     Process runProcess = new ProcessBuilder("java", "-cp", studentDir.getAbsolutePath(), className).start();
+    //                     runProcess.waitFor();
+    //                     if (runProcess.exitValue() == 0) {
+    //                         // If the program ran successfully, read output from selected file
+    //                         List<String> lines = Files.readAllLines(selectedOutputFile.toPath(), StandardCharsets.UTF_8);
+    //                         return String.join("\n", lines);
+    //                     } else {
+    //                         // If the program encountered an error during execution
+    //                         return new String(runProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+    //                     }
+    //                 } else {
+    //                     return "No main class found to run.";
+    //                 }
+    //             } else {
+    //                 // If there are compilation errors
+    //                 return new String(compileProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+    //             }
+    //         } else {
+    //             return "No Java files found.";
+    //         }
+    //     } catch (IOException | InterruptedException e) {
+    //         e.printStackTrace();
+    //         return e.getMessage();
+    //     }
+    // }
 
     @FXML
     private void goBack() {
