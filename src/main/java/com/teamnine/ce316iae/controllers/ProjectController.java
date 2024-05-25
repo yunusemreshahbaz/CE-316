@@ -6,10 +6,12 @@ import javafx.collections.FXCollections;
 import com.teamnine.ce316iae.Configuration;
 import javafx.stage.FileChooser;
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.io.IOException;
+import java.nio.file.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class ProjectController {
 
@@ -23,6 +25,8 @@ public class ProjectController {
     private TextField expectedOutputFileField;
     @FXML
     private Button createProjectButton;
+    @FXML
+    private ListView<String> listView1;
     @FXML
     private ListView<String> listView3;
 
@@ -57,6 +61,46 @@ public class ProjectController {
         File selectedZip = fileChooser.showOpenDialog(submissionsDirectoryField.getScene().getWindow());
         if (selectedZip != null) {
             submissionsDirectoryField.setText(selectedZip.getAbsolutePath());
+            extractZipFile(selectedZip);
+        }
+    }
+
+    
+    private void extractZipFile(File zipFile) {
+        Path destDir = Paths.get(zipFile.getParent(), "extracted");
+        try {
+            Files.createDirectories(destDir);
+            try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(zipFile.toPath()))) {
+                ZipEntry entry;
+                while ((entry = zipInputStream.getNextEntry()) != null) {
+                    Path entryPath = destDir.resolve(entry.getName());
+                    if (entry.isDirectory()) {
+                        Files.createDirectories(entryPath);
+                    } else {
+                        Files.createDirectories(entryPath.getParent());
+                        Files.copy(zipInputStream, entryPath, StandardCopyOption.REPLACE_EXISTING);
+                    }
+                    zipInputStream.closeEntry();
+                }
+            }
+            populateListView(destDir);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error extracting ZIP file: " + e.getMessage());
+        }
+    }
+
+    private void populateListView(Path destDir) {
+        listView1.getItems().clear();
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(destDir)) {
+            for (Path entry : stream) {
+                if (Files.isDirectory(entry)) {
+                    listView1.getItems().add(entry.getFileName().toString());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error populating ListView: " + e.getMessage());
         }
     }
 
