@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JavaCompiler extends Compiler {
     public static final String COMPILER_PATH = "javac";
-    public static final String ARGS = "-sourcepath . Main.java";
+    public static final String ARGS = "-sourcepath .";
     public static final String RUN_COMMAND = "java Main";
 
     public JavaCompiler(File workingDirectory) {
@@ -23,7 +23,7 @@ public class JavaCompiler extends Compiler {
             if (javaFiles != null) {
                 List<String> compileCommand = new ArrayList<>();
                 compileCommand.add(COMPILER_PATH);
-                compileCommand.add(ARGS);
+                compileCommand.addAll(Arrays.asList(ARGS.split(" ")));
                 for (File javaFile : javaFiles) {
                     compileCommand.add(javaFile.getAbsolutePath());
                 }
@@ -36,7 +36,7 @@ public class JavaCompiler extends Compiler {
                             .findFirst().orElse(null);
                     if (mainClass != null) {
                         String className = mainClass.getName().replace(".class", "");
-                        Process runProcess = new ProcessBuilder(RUN_COMMAND)
+                        Process runProcess = new ProcessBuilder(RUN_COMMAND.split(" "))
                                 .directory(studentDir)
                                 .start();
                         runProcess.waitFor();
