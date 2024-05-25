@@ -23,7 +23,7 @@
         <TextField fx:id="expectedOutputFileField" maxWidth="300" style="-fx-text-fill: #333;"/>
         <Button text="Browse" onAction="#browseOutputFile"/>
     </HBox>
-    <Button text="Create" fx:id="createProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+    <Button text="Run" fx:id="createProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
     <ListView fx:id="projectListView"/>
     <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>

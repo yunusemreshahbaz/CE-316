@@ -9,23 +9,23 @@
 <VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ConfigurationController"
       minHeight="800" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
     <Label text="Configuration ID:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="configurationIDField"/>
+    <TextField fx:id="configurationIDField" maxWidth="300"/>
     <Label text="Configuration Name:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="configurationNameField"/>
+    <TextField fx:id="configurationNameField" maxWidth="300"/>
     <Label text="Compiler Path:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="compilerPathField"/>
+    <TextField fx:id="compilerPathField" maxWidth="300"/>
     <Label text="Language:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="languageField"/>
+    <TextField fx:id="languageField" maxWidth="300"/>
     <Label text="Run Command:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="runCommandField"/>
+    <TextField fx:id="runCommandField" maxWidth="300"/>
     <Label text="Arguments:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="argumentsField"/>
+    <TextField fx:id="argumentsField" maxWidth="300"/>
     <Label text="Config Path:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="configPathField"/>
+    <TextField fx:id="configPathField" maxWidth="300"/>
     <Label text="Export Path:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="exportPathField"/>
+    <TextField fx:id="exportPathField" maxWidth="300"/>
     <Button text="Save Configuration" fx:id="saveConfigurationButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
-    <TableView fx:id="configurationTable" VBox.vgrow="ALWAYS">
+    <TableView fx:id="configurationTable" VBox.vgrow="ALWAYS" maxWidth="600">
         <columns>
             <TableColumn fx:id="columnID" text="ID"/>
             <TableColumn fx:id="columnName" text="Name"/>
