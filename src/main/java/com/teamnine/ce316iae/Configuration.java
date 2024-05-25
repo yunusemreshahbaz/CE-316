@@ -22,7 +22,6 @@ public class Configuration implements Serializable {
     private String configPath;
     private String exportPath;
 
-
     // Static list of configurations
     private static final ObservableList<Configuration> configurations = FXCollections.observableArrayList();
 
@@ -126,7 +125,6 @@ public class Configuration implements Serializable {
 
     public void exportConfiguration(String filePath) {
         try {
-
             FileOutputStream fileOut = new FileOutputStream(filePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
@@ -187,8 +185,8 @@ public class Configuration implements Serializable {
         return arguments;
     }
 
-    public void setArguments(List<String> Arguments) {
-        this.arguments = Arguments;
+    public void setArguments(List<String> arguments) {
+        this.arguments = arguments;
     }
 
     public String getConfigPath() {

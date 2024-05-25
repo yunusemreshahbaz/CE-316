@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import com.teamnine.ce316iae.Configuration;
 import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
+import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
+// import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -36,7 +38,7 @@ public class ProjectController {
     private ListView<String> listView3;
 
     private File selectedOutputFile;
-
+    private Path extractedDir;
     private List<File> studentDirectories = new ArrayList<>();
 
     @FXML
@@ -51,6 +53,11 @@ public class ProjectController {
         });
 
         createProjectButton.setOnAction(e -> createProject());
+        listView1.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                run();
+            }
+        });
     }
 
     private void createProject() {
@@ -60,8 +67,26 @@ public class ProjectController {
         String expectedOutput = expectedOutputFileField.getText();
 
         selectedOutputFile = new File(expectedOutput);
+        
+        populateStudentDirectories();
+        
+        listView1.getItems().clear();
+        for (File dir : studentDirectories) {
+            listView1.getItems().add(dir.getName());
+        }
+    }
 
-        run();
+    private void populateStudentDirectories() {
+        studentDirectories.clear();
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(extractedDir)) {
+            for (Path entry : stream) {
+                if (Files.isDirectory(entry)) {
+                    studentDirectories.add(entry.toFile());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -77,16 +102,15 @@ public class ProjectController {
             extractZipFile(selectedZip);
         }
     }
-
     
     private void extractZipFile(File zipFile) {
-        Path destDir = Paths.get(zipFile.getParent(), "extracted");
+        extractedDir = Paths.get(zipFile.getParent(), "extracted");
         try {
-            Files.createDirectories(destDir);
+            Files.createDirectories(extractedDir);
             try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(zipFile.toPath()))) {
                 ZipEntry entry;
                 while ((entry = zipInputStream.getNextEntry()) != null) {
-                    Path entryPath = destDir.resolve(entry.getName());
+                    Path entryPath = extractedDir.resolve(entry.getName());
                     if (entry.isDirectory()) {
                         Files.createDirectories(entryPath);
                     } else {
@@ -96,24 +120,13 @@ public class ProjectController {
                     zipInputStream.closeEntry();
                 }
             }
-            populateListView(destDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error extracting ZIP file: " + e.getMessage());
-        }
-    }
-
-    private void populateListView(Path destDir) {
-        listView1.getItems().clear();
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(destDir)) {
-            for (Path entry : stream) {
-                if (Files.isDirectory(entry)) {
-                    listView1.getItems().add(entry.getFileName().toString());
-                }
+            populateStudentDirectories();
+            listView1.getItems().clear();
+            for (File dir : studentDirectories) {
+                listView1.getItems().add(dir.getName());
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error populating ListView: " + e.getMessage());
         }
     }
 
@@ -141,57 +154,44 @@ public class ProjectController {
     }
 
     private void run() {
-        listView2.getItems().clear();
-        JavaCompiler javaCompiler = new JavaCompiler(new File("/path/to/java/projects"));
-        for (File studentDir : studentDirectories) {
-            String output = javaCompiler.compileAndRun(studentDir, selectedOutputFile);
-            listView2.getItems().add(output);
+        String selectedStudent = listView1.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null) {
+            return;
         }
-    }
+        
+        listView2.getItems().clear();
+        File studentDir = studentDirectories.stream()
+                .filter(dir -> dir.getName().equals(selectedStudent))
+                .findFirst().orElse(null);
+        
+        if (studentDir == null) {
+            listView2.getItems().add("No student directory found for selected student.");
+            return;
+        }
 
-    // private String compileAndRunStudentCode(File studentDir) {
-    //     try {
-    //         File[] javaFiles = studentDir.listFiles((dir, name) -> name.endsWith(".java"));
-    //         if (javaFiles != null) {
-    //             List<String> compileCommand = new ArrayList<>();
-    //             compileCommand.add("javac");
-    //             for (File javaFile : javaFiles) {
-    //                 compileCommand.add(javaFile.getAbsolutePath());
-    //             }
-    //             Process compileProcess = new ProcessBuilder(compileCommand).start();
-    //             compileProcess.waitFor();
-    //             if (compileProcess.exitValue() == 0) {
-    //                 // if compilation is successful
-    //                 File mainClass = Arrays.stream(studentDir.listFiles())
-    //                         .filter(file -> file.getName().endsWith(".class"))
-    //                         .findFirst().orElse(null);
-    //                 if (mainClass != null) {
-    //                     String className = mainClass.getName().replace(".class", "");
-    //                     Process runProcess = new ProcessBuilder("java", "-cp", studentDir.getAbsolutePath(), className).start();
-    //                     runProcess.waitFor();
-    //                     if (runProcess.exitValue() == 0) {
-    //                         // If the program ran successfully, read output from selected file
-    //                         List<String> lines = Files.readAllLines(selectedOutputFile.toPath(), StandardCharsets.UTF_8);
-    //                         return String.join("\n", lines);
-    //                     } else {
-    //                         // If the program encountered an error during execution
-    //                         return new String(runProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
-    //                     }
-    //                 } else {
-    //                     return "No main class found to run.";
-    //                 }
-    //             } else {
-    //                 // If there are compilation errors
-    //                 return new String(compileProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
-    //             }
-    //         } else {
-    //             return "No Java files found.";
-    //         }
-    //     } catch (IOException | InterruptedException e) {
-    //         e.printStackTrace();
-    //         return e.getMessage();
-    //     }
-    // }
+        Configuration config = configurationComboBox.getValue();
+        if (config == null) {
+            listView2.getItems().add("No configuration selected.");
+            return;
+        }
+
+        String output;
+        switch (config.getLanguage().toLowerCase()) {
+            case "java":
+                output = new JavaCompiler(studentDir).compileAndRun(studentDir, selectedOutputFile);
+                break;
+            case "c":
+                output = new CCompiler(studentDir).compileAndRun(studentDir, selectedOutputFile);
+                break;
+            // case "python":
+            //     output = new PythonInterpreter(studentDir).run(studentDir, selectedOutputFile);
+            //     break;
+            default:
+                output = "Unsupported language selected.";
+        }
+        
+        listView2.getItems().add(output);
+    }
 
     @FXML
     private void goBack() {
