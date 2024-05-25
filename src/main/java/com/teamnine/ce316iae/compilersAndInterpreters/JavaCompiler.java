@@ -20,47 +20,53 @@ public class JavaCompiler extends Compiler {
     public String compileAndRun(File studentDir, File selectedOutputFile) {
         try {
             File[] javaFiles = studentDir.listFiles((dir, name) -> name.endsWith(".java"));
-            if (javaFiles != null) {
-                List<String> compileCommand = new ArrayList<>();
-                compileCommand.add(COMPILER_PATH);
-                compileCommand.addAll(Arrays.asList(ARGS.split(" ")));
-                for (File javaFile : javaFiles) {
-                    compileCommand.add(javaFile.getAbsolutePath());
-                }
-                Process compileProcess = new ProcessBuilder(compileCommand).start();
-                compileProcess.waitFor();
-                if (compileProcess.exitValue() == 0) {
-                    // if compilation is successful
-                    File mainClass = Arrays.stream(studentDir.listFiles())
-                            .filter(file -> file.getName().endsWith(".class"))
-                            .findFirst().orElse(null);
-                    if (mainClass != null) {
-                        String className = mainClass.getName().replace(".class", "");
-                        Process runProcess = new ProcessBuilder(RUN_COMMAND.split(" "))
-                                .directory(studentDir)
-                                .start();
-                        runProcess.waitFor();
-                        if (runProcess.exitValue() == 0) {
-                            // if the program ran successfully, read output from selected file
-                            List<String> lines = Files.readAllLines(selectedOutputFile.toPath(), StandardCharsets.UTF_8);
-                            return String.join("\n", lines);
-                        } else {
-                            // if the program encountered an error during execution
-                            return new String(runProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
-                        }
-                    } else {
-                        return "No main class found to run.";
-                    }
-                } else {
-                    // if there are compilation errors
-                    return new String(compileProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
-                }
-            } else {
+            if (javaFiles == null || javaFiles.length == 0) {
                 return "No Java files found.";
             }
+
+            List<String> compileCommand = new ArrayList<>();
+            compileCommand.add(COMPILER_PATH);
+            compileCommand.addAll(Arrays.asList(ARGS.split(" ")));
+            for (File javaFile : javaFiles) {
+                compileCommand.add(javaFile.getAbsolutePath());
+            }
+
+            System.out.println("Compile command: " + String.join(" ", compileCommand));
+
+            Process compileProcess = new ProcessBuilder(compileCommand).start();
+            int compileExitCode = compileProcess.waitFor();
+            if (compileExitCode != 0) {
+                String compileErrors = new String(compileProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+                return "Compilation failed:\n" + compileErrors;
+            }
+
+            File mainClass = Arrays.stream(studentDir.listFiles())
+                    .filter(file -> file.getName().endsWith(".class"))
+                    .findFirst().orElse(null);
+            if (mainClass == null) {
+                return "No main class found to run.";
+            }
+
+            String className = mainClass.getName().replace(".class", "");
+
+            List<String> runCommand = Arrays.asList("java", className);
+            System.out.println("Run command: " + String.join(" ", runCommand));
+
+            Process runProcess = new ProcessBuilder(runCommand)
+                    .directory(studentDir)
+                    .start();
+            int runExitCode = runProcess.waitFor();
+
+            if (runExitCode != 0) {
+                String runtimeErrors = new String(runProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+                return "Runtime failed:\n" + runtimeErrors;
+            }
+
+            List<String> lines = Files.readAllLines(selectedOutputFile.toPath(), StandardCharsets.UTF_8);
+            return String.join("\n", lines);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-            return e.getMessage();
+            return "Exception occurred: " + e.getMessage();
         }
     }
 }

@@ -11,7 +11,6 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.io.IOException;
 import java.nio.file.*;
@@ -44,11 +43,19 @@ public class ProjectController {
     @FXML
     private void initialize() {
         configurationComboBox.setItems(Configuration.getConfigurations());
-        configurationComboBox.setCellFactory(listView -> new ListCell<Configuration>() {
+        configurationComboBox.setCellFactory(_ -> new ListCell<>() {
             @Override
-            protected void updateItem(Configuration config, boolean empty) {
-                super.updateItem(config, empty);
-                setText(empty || config == null ? "" : config.getConfigurationName());
+            protected void updateItem(Configuration item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getConfigurationName());
+            }
+        });
+
+        configurationComboBox.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(Configuration item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getConfigurationName());
             }
         });
 
@@ -154,10 +161,13 @@ public class ProjectController {
     }
 
     private void run() {
+        System.out.println("TESTT 1");
         String selectedStudent = listView1.getSelectionModel().getSelectedItem();
         if (selectedStudent == null) {
             return;
         }
+
+        System.out.println("TESTT 2");
         
         listView2.getItems().clear();
         File studentDir = studentDirectories.stream()
@@ -169,11 +179,15 @@ public class ProjectController {
             return;
         }
 
+        System.out.println("TESTT 3");
+
         Configuration config = configurationComboBox.getValue();
         if (config == null) {
             listView2.getItems().add("No configuration selected.");
             return;
         }
+
+        System.out.println("TESTT 4");
 
         String output;
         switch (config.getLanguage().toLowerCase()) {
