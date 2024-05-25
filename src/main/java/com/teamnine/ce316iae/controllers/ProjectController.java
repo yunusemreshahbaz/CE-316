@@ -6,6 +6,10 @@ import javafx.collections.FXCollections;
 import com.teamnine.ce316iae.Configuration;
 import javafx.stage.FileChooser;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.io.IOException;
 
 public class ProjectController {
 
@@ -16,13 +20,11 @@ public class ProjectController {
     @FXML
     private TextField submissionsDirectoryField;
     @FXML
-    private ComboBox<String> inputMethodComboBox;
-    @FXML
     private TextField expectedOutputFileField;
     @FXML
     private Button createProjectButton;
     @FXML
-    private ListView<String> projectListView;
+    private ListView<String> listView3;
 
     @FXML
     private void initialize() {
@@ -35,7 +37,6 @@ public class ProjectController {
             }
         });
 
-        projectListView.setItems(FXCollections.observableArrayList());
         createProjectButton.setOnAction(e -> createProject());
     }
 
@@ -44,7 +45,6 @@ public class ProjectController {
         Configuration config = configurationComboBox.getValue();
         String submissionsDirectory = submissionsDirectoryField.getText();
         String expectedOutput = expectedOutputFileField.getText();
-        projectListView.getItems().add(projectName + " - " + submissionsDirectory +  " - " + expectedOutput + " (" + (config != null ? config.getConfigurationName() : "No configuration selected") + ")");
     }
 
     @FXML
@@ -70,8 +70,19 @@ public class ProjectController {
         File selectedFile = fileChooser.showOpenDialog(expectedOutputFileField.getScene().getWindow());
         if (selectedFile != null) {
             expectedOutputFileField.setText(selectedFile.getAbsolutePath());
+            displayOutputFileContents(selectedFile);
         }
     }
+
+    private void displayOutputFileContents(File file) {
+        try {
+            List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+            listView3.setItems(FXCollections.observableArrayList(lines));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     private void goBack() {

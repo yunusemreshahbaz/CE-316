@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Separator?>
 
 <VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController"
       minHeight="800" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
@@ -21,9 +22,15 @@
     <Label text="Expected Output [Txt File]:" style="-fx-text-fill: #333;"/>
     <HBox spacing="5" alignment="center">
         <TextField fx:id="expectedOutputFileField" maxWidth="300" style="-fx-text-fill: #333;"/>
-        <Button text="Browse" onAction="#browseOutputFile"/>
+        <Button text="Browse" onAction="#browseOutputFile" style="-fx-text-fill: #333;"/>
     </HBox>
     <Button text="Run" fx:id="createProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
-    <ListView fx:id="projectListView"/>
+    <HBox spacing="10" alignment="center" fillHeight="true">
+        <ListView fx:id="listView1" HBox.hgrow="ALWAYS"/>
+        <Separator orientation="VERTICAL" style="-fx-pref-width: 0;"/>
+        <ListView fx:id="listView2" HBox.hgrow="ALWAYS"/>
+        <Separator orientation="VERTICAL" style="-fx-pref-width: 0;"/>
+        <ListView fx:id="listView3" HBox.hgrow="ALWAYS"/>
+    </HBox>
     <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>
