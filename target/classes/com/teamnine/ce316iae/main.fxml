@@ -4,14 +4,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Text?>
 <VBox spacing="20" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.MainController"
-      minHeight="400" minWidth="600" style="-fx-background-color: #f2f2f2;">
+      minHeight="750" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
 
     <Text text="Integrated Assignment Environment - Group 9" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
     <Button text="Project" onAction="#loadProject" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
-    <Button text="Assignment" onAction="#loadAssignment" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <Button text="Configuration" onAction="#loadConfiguration" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
-    <Button text="Output" onAction="#loadOutput" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
-    <Button text="Zip" onAction="#loadZip" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200; -fx-pref-height: 40;"/>
     <padding>
         <Insets top="20" right="50" bottom="20" left="50"/>
     </padding>

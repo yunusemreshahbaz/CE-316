@@ -5,14 +5,32 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Separator?>
 
-<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController" style="-fx-background-color: #f2f2f2;">
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ProjectController"
+      minHeight="750" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
     <Label text="Project Name:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="projectNameField"/>
-    <Label text="Project Directory:" style="-fx-text-fill: #333;"/>
-    <TextField fx:id="projectDirectoryField"/>
+    <TextField fx:id="projectNameField" maxWidth="400"/>
     <Label text="Select Configuration:" style="-fx-text-fill: #333;"/>
-    <ComboBox fx:id="configurationComboBox"/>
-    <Button text="Add Project" fx:id="addProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
-    <ListView fx:id="projectListView"/>
+    <ComboBox fx:id="configurationComboBox" maxWidth="400"/>
+    <Label text="Submissions Directory [Zip File]:" style="-fx-text-fill: #333;"/>
+    <HBox spacing="5" alignment="center">
+        <TextField fx:id="submissionsDirectoryField" maxWidth="300" style="-fx-text-fill: #333;"/>
+        <Button text="Browse" onAction="#browseDirectory"/>
+    </HBox>
+    <Label text="Expected Output [Txt File]:" style="-fx-text-fill: #333;"/>
+    <HBox spacing="5" alignment="center">
+        <TextField fx:id="expectedOutputFileField" maxWidth="300" style="-fx-text-fill: #333;"/>
+        <Button text="Browse" onAction="#browseOutputFile" style="-fx-text-fill: #333;"/>
+    </HBox>
+    <Button text="Run" fx:id="createProjectButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+    <HBox spacing="10" alignment="center" fillHeight="true">
+        <ListView fx:id="listView1" HBox.hgrow="ALWAYS"/>
+        <Separator orientation="VERTICAL" style="-fx-pref-width: 0;"/>
+        <ListView fx:id="listView2" HBox.hgrow="ALWAYS"/>
+        <Separator orientation="VERTICAL" style="-fx-pref-width: 0;"/>
+        <ListView fx:id="listView3" HBox.hgrow="ALWAYS"/>
+    </HBox>
+    <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>

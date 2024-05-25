@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.text.Text?>
 
-<GridPane hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ConfigurationController" maxHeight="Infinity" maxWidth="Infinity">
-    <Label text="Configuration ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField fx:id="configurationIDField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-    <Label text="Configuration Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="configurationNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    <Label text="Compiler Path:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField fx:id="compilerPathField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <Label text="Language:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-    <TextField fx:id="languageField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-    <Label text="Run Command:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-    <TextField fx:id="runCommandField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-    <Label text="Arguments:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-    <TextField fx:id="argumentsField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-    <Label text="Config Path:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-    <TextField fx:id="configPathField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-    <Label text="Export Path:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-    <TextField fx:id="exportPathField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-    <Button text="Save Configuration" fx:id="saveConfigurationButton" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-    <TableView fx:id="configurationTable" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2" maxWidth="Infinity" maxHeight="Infinity">
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teamnine.ce316iae.controllers.ConfigurationController"
+      minHeight="800" minWidth="1200" maxHeight="800" maxWidth="1200" style="-fx-background-color: #f2f2f2;">
+    <Label text="Configuration ID:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="configurationIDField" maxWidth="300"/>
+    <Label text="Configuration Name:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="configurationNameField" maxWidth="300"/>
+    <Label text="Compiler Path:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="compilerPathField" maxWidth="300"/>
+    <Label text="Language:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="languageField" maxWidth="300"/>
+    <Label text="Run Command:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="runCommandField" maxWidth="300"/>
+    <Label text="Arguments:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="argumentsField" maxWidth="300"/>
+    <Label text="Config Path:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="configPathField" maxWidth="300"/>
+    <Label text="Export Path:" style="-fx-text-fill: #333;"/>
+    <TextField fx:id="exportPathField" maxWidth="300"/>
+    <Button text="Save Configuration" fx:id="saveConfigurationButton" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+    <TableView fx:id="configurationTable" VBox.vgrow="ALWAYS" maxWidth="600">
         <columns>
-            <TableColumn text="ID" fx:id="columnID"/>
-            <TableColumn text="Name" fx:id="columnName"/>
-            <TableColumn text="Language" fx:id="columnLanguage"/>
-            <TableColumn text="Compiler Path" fx:id="columnCompilerPath"/>
+            <TableColumn fx:id="columnID" text="ID"/>
+            <TableColumn fx:id="columnName" text="Name"/>
+            <TableColumn fx:id="columnCompilerPath" text="Compiler Path"/>
+            <TableColumn fx:id="columnLanguage" text="Language"/>
         </columns>
     </TableView>
-</GridPane>
+    <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+</VBox>
