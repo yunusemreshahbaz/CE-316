@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
-public abstract class   Compiler {
+public abstract class Compiler {
     protected final File workingDirectory;
 
     public Compiler(File workingDirectory) {
