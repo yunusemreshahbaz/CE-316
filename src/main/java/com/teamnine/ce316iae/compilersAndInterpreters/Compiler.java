@@ -1,10 +1,8 @@
 package com.teamnine.ce316iae.compilersAndInterpreters;
 
-import com.teamnine.ce316iae.Output;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
-import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 public abstract class   Compiler {
@@ -14,7 +12,7 @@ public abstract class   Compiler {
         this.workingDirectory = workingDirectory;
     }
 
-    public Output compile(String path, String args) throws Exception {
+    /*public Output compile(String path, String args) throws Exception {
         Process process = new ProcessBuilder()
                 .command(path, args)
                 .directory(workingDirectory)
@@ -55,6 +53,7 @@ public abstract class   Compiler {
             return new Output(true, "", outputBuilder.toString());
         }
     }
+    */
 
     public File getWorkingDirectory() {
         return workingDirectory;

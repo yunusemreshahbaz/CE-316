@@ -9,6 +9,14 @@ public class Project implements Serializable {
     private int projectID;
     private String projectName;
     private String projectDirectory;
+    private String zipFilePath;
+    private String expectedOutputFilePath;
+
+    public Project(int projectID, String projectName, String projectDirectory) {
+        this.projectID = projectID;
+        this.projectName = projectName;
+        this.projectDirectory = projectDirectory;
+    }
 
     // Set-get methods
     public int getProjectID() {
