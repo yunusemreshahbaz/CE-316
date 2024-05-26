@@ -161,13 +161,13 @@ public class ProjectController {
     }
 
     private void run() {
-        System.out.println("TESTT 1");
+
         String selectedStudent = listView1.getSelectionModel().getSelectedItem();
         if (selectedStudent == null) {
             return;
         }
 
-        System.out.println("TESTT 2");
+
         
         listView2.getItems().clear();
         File studentDir = studentDirectories.stream()
@@ -179,7 +179,6 @@ public class ProjectController {
             return;
         }
 
-        System.out.println("TESTT 3");
 
         Configuration config = configurationComboBox.getValue();
         if (config == null) {
@@ -187,7 +186,6 @@ public class ProjectController {
             return;
         }
 
-        System.out.println("TESTT 4");
 
         String output;
         switch (config.getLanguage().toLowerCase()) {

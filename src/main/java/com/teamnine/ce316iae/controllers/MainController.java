@@ -39,6 +39,10 @@ public class MainController {
         loadScene("/com/teamnine/ce316iae/project.fxml", "Integrated Assignment Environment - Project");
     }
 
+    @FXML
+    public void loadHelp() {
+        loadScene("/com/teamnine/ce316iae/help.fxml", "Integrated Assignment Environment - Help");
+    }
 
     @FXML
     public void maximizeWindow() {
