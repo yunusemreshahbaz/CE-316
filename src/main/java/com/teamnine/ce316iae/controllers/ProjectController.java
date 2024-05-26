@@ -1,7 +1,6 @@
 package com.teamnine.ce316iae.controllers;
 
 import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
-import com.teamnine.ce316iae.compilersAndInterpreters.RustCompiler;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -211,9 +210,6 @@ public class ProjectController {
                 break;
             case "python":
                 output = new PythonInterpreter(studentDir).run(studentDir, selectedOutputFile);
-                break;
-            case "rust":
-                output = new RustCompiler(studentDir).compileAndRun(studentDir, selectedOutputFile);
                 break;
             default:
                 output = "Unsupported language selected.";

@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
 import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
-import com.teamnine.ce316iae.compilersAndInterpreters.RustCompiler;
+
 import java.io.File;
 import java.util.Arrays;
 
@@ -39,6 +39,12 @@ public class Configuration implements Serializable {
         this.exportPath = exportPath;
     }
 
+    public Configuration(int configurationID, String configurationName, String language) {
+        this.configurationID = configurationID;
+        this.configurationName = configurationName;
+        this.language = language;
+    }
+
     public Configuration() {
 
     }
@@ -65,20 +71,13 @@ public class Configuration implements Serializable {
         File pythonWorkingDirectory = new File("/path/to/python/projects");
         PythonInterpreter pythonInterpreter = new PythonInterpreter(pythonWorkingDirectory);
 
-        File rustWorkingDirectory = new File("/path/to/rust/projects");
-        RustCompiler rustCompiler = new RustCompiler(rustWorkingDirectory);
-
-        addConfiguration(new Configuration(1, "C Compiler Configuration", CCompiler.COMPILER_PATH, "C",
-                Arrays.asList(CCompiler.RUN_COMMAND), Arrays.asList(CCompiler.ARGS), "/configs", "/exports"));
-
+        addConfiguration(new Configuration(1, "C Compiler Configuration", "C"));
         addConfiguration(new Configuration(2, "Java Compiler Configuration", JavaCompiler.COMPILER_PATH, "Java",
                 Arrays.asList(JavaCompiler.RUN_COMMAND), Arrays.asList(JavaCompiler.ARGS), "/configs", "/exports"));
 
         addConfiguration(new Configuration(3, "Python Interpreter Configuration", PythonInterpreter.INTERPRETER_PATH, "Python",
                 Collections.singletonList("python3 main.py"), Collections.emptyList(), "/configs/python", "/exports/python"));
 
-        addConfiguration(new Configuration(4, "Rust Compiler Configuration", RustCompiler.COMPILER_PATH, "Rust",
-                Arrays.asList(RustCompiler.RUN_COMMAND), Arrays.asList(RustCompiler.ARGS), "/configs/rust", "/exports/rust"));
 
         }
 
