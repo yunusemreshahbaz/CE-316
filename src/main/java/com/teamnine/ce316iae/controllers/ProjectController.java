@@ -1,5 +1,6 @@
 package com.teamnine.ce316iae.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
@@ -35,6 +36,8 @@ public class ProjectController {
     private ListView<String> listView2;
     @FXML
     private ListView<String> listView3;
+    @FXML
+    private TextArea textAreaComparison;
 
     private File selectedOutputFile;
     private Path extractedDir;
@@ -80,6 +83,17 @@ public class ProjectController {
         listView1.getItems().clear();
         for (File dir : studentDirectories) {
             listView1.getItems().add(dir.getName());
+        }
+    }
+
+    private void updateComparisonResult() {
+        ObservableList<String> outputList = listView2.getItems();
+        ObservableList<String> expectedOutputList = listView3.getItems();
+
+        if (outputList.equals(expectedOutputList)) {
+            textAreaComparison.setText("Correct");
+        } else {
+            textAreaComparison.setText("Incorrect");
         }
     }
 
@@ -155,10 +169,12 @@ public class ProjectController {
         try {
             List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
             listView3.setItems(FXCollections.observableArrayList(lines));
+            updateComparisonResult();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     private void run() {
 
@@ -166,8 +182,6 @@ public class ProjectController {
         if (selectedStudent == null) {
             return;
         }
-
-
         
         listView2.getItems().clear();
         File studentDir = studentDirectories.stream()
@@ -178,7 +192,6 @@ public class ProjectController {
             listView2.getItems().add("No student directory found for selected student.");
             return;
         }
-
 
         Configuration config = configurationComboBox.getValue();
         if (config == null) {
@@ -203,7 +216,10 @@ public class ProjectController {
         }
         
         listView2.getItems().add(output);
+        updateComparisonResult();
     }
+
+
 
     @FXML
     private void goBack() {
