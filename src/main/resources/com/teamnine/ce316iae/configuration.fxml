@@ -33,5 +33,7 @@
             <TableColumn fx:id="columnLanguage" text="Language"/>
         </columns>
     </TableView>
+    <Button fx:id="exportButton" text="Export Configuration" onAction="#exportConfig"/>
+    <Button fx:id="importButton" text="Import Configuration" onAction="#importConfig"/>
     <Button text="Back" onAction="#goBack" style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
 </VBox>
