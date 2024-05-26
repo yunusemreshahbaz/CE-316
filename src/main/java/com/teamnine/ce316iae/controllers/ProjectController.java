@@ -7,7 +7,7 @@ import javafx.collections.FXCollections;
 import com.teamnine.ce316iae.Configuration;
 import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
 import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
-// import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
+import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -199,7 +199,6 @@ public class ProjectController {
             return;
         }
 
-
         String output;
         switch (config.getLanguage().toLowerCase()) {
             case "java":
@@ -208,9 +207,9 @@ public class ProjectController {
             case "c":
                 output = new CCompiler(studentDir).compileAndRun(studentDir, selectedOutputFile);
                 break;
-            // case "python":
-            //     output = new PythonInterpreter(studentDir).run(studentDir, selectedOutputFile);
-            //     break;
+            case "python":
+                output = new PythonInterpreter(studentDir).run(studentDir, selectedOutputFile);
+                break;
             default:
                 output = "Unsupported language selected.";
         }

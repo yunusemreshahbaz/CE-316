@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
 import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
+import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
 import java.io.File;
 import java.util.Arrays;
 
@@ -60,6 +61,12 @@ public class Configuration implements Serializable {
 
         File javaWorkingDirectory = new File("/path/to/java/projects");
         JavaCompiler javaCompiler = new JavaCompiler(javaWorkingDirectory);
+
+        File pythonWorkingDirectory = new File("/path/to/python/projects");
+        PythonInterpreter pythonInterpreter = new PythonInterpreter(pythonWorkingDirectory);
+
+        addConfiguration(new Configuration(3, "Python Interpreter Configuration", PythonInterpreter.INTERPRETER_PATH, "Python",
+                Collections.singletonList("python3 main.py"), Collections.emptyList(), "/configs/python", "/exports/python"));
 
         addConfiguration(new Configuration(1, "C Compiler Configuration", CCompiler.COMPILER_PATH, "C",
                 Arrays.asList(CCompiler.RUN_COMMAND), Arrays.asList(CCompiler.ARGS), "/configs", "/exports"));
