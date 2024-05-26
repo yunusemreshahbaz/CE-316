@@ -1,5 +1,6 @@
 package com.teamnine.ce316iae.controllers;
 
+import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
 import com.teamnine.ce316iae.compilersAndInterpreters.RustCompiler;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +9,6 @@ import javafx.collections.FXCollections;
 import com.teamnine.ce316iae.Configuration;
 import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
 import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
-import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.nio.charset.StandardCharsets;

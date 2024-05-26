@@ -1,4 +1,5 @@
 package com.teamnine.ce316iae;
+import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -6,7 +7,6 @@ import java.io.*;
 import java.util.*;
 import com.teamnine.ce316iae.compilersAndInterpreters.CCompiler;
 import com.teamnine.ce316iae.compilersAndInterpreters.JavaCompiler;
-import com.teamnine.ce316iae.compilersAndInterpreters.PythonInterpreter;
 import com.teamnine.ce316iae.compilersAndInterpreters.RustCompiler;
 import java.io.File;
 import java.util.Arrays;
